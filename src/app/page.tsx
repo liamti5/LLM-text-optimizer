@@ -1,5 +1,5 @@
 'use client';
-import { Button, TextField, Typography, Container } from '@mui/material';
+import { Button, TextField, Typography, Container, Paper } from '@mui/material';
 import React, { useState } from 'react';
 
 
@@ -18,13 +18,14 @@ export default function Home() {
     });
 
     const data = await response.json();
-    setOptimizedText(JSON.stringify(data.message, null, 2));
+    console.log(data.message)
+    setOptimizedText(JSON.stringify(data.message.choices[0].message.content, null, 2));
   }
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Text Optimizer
+      <Typography variant="h4" component="h1" gutterBottom marginTop={"50px"}>
+        LLM Text Optimizer
       </Typography>
       <TextField
         fullWidth
@@ -39,9 +40,13 @@ export default function Home() {
       <Button variant="contained" color="primary" onClick={optimizeText}>
         Optimize Text
       </Button>
-      <Typography variant="h6" component="h2" gutterBottom>
-        {optimizedText}
-      </Typography>
+      {optimizedText && (
+        <Paper elevation={3} style={{ padding: '16px', marginTop: '16px' }}>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {optimizedText}
+          </Typography>
+        </Paper>
+      )}
     </Container>
   );
 }
