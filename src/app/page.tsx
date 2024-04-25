@@ -10,6 +10,7 @@ export default function Home() {
 
   const optimizeText = async () => {
     setLoading(true);
+    
     const response = await fetch('/api/optimize', {
       method: 'POST',
       headers: {
@@ -32,7 +33,7 @@ export default function Home() {
       <TextField
         color='primary'
         fullWidth
-        label="Enter your text"
+        label="Enter the text you want to optimize and click on the button below."
         multiline
         rows={4}
         margin="normal"
